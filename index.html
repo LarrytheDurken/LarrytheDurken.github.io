@@ -102,9 +102,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensor( [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] )</span><br></pre></td></tr></table></figure>
 <p>我们可以通过<code>shape</code>属性来访问张量的形状。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x_shape = x.shape</span><br><span class="line"><span class="built_in">print</span>(x_shape)</span><br></pre></td></tr></table></figure>
-<p>也可以获取张量中元素的总数。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensor( [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11] )</span><br></pre></td></tr></table></figure>
-
+<p>也可以获取张量中元素的总数。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x_num = x.numel()</span><br><span class="line"><span class="built_in">print</span>(x_num)</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">12</span><br></pre></td></tr></table></figure>
@@ -112,7 +111,15 @@
 <p>如果要改变一个张量的形状而不改变元素数量和元素值，可以使用<code>reshape</code>函数。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X = x.reshape(3, 4)</span><br><span class="line"><span class="built_in">print</span>(X)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor([[ 0,  1,  2,  3],</span><br><span class="line">        [ 4,  5,  6,  7],</span><br><span class="line">        [ 8,  9, 10, 11]])</span><br></pre></td></tr></table></figure>
-
+<p>使用全0、全1和其他常量或从特定分布中随机采样的数字。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zeros = torch.zeros((<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span>(zeros)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tensor([[[0., 0., 0., 0.],</span><br><span class="line">         [0., 0., 0., 0.],</span><br><span class="line">         [0., 0., 0., 0.]],</span><br><span class="line"></span><br><span class="line">        [[0., 0., 0., 0.],</span><br><span class="line">         [0., 0., 0., 0.],</span><br><span class="line">         [0., 0., 0., 0.]]])</span><br></pre></td></tr></table></figure>
+<p>通过提供包含数值的Python列表来位所需张量中的每个元素赋予确定值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list = torch.tensor([[1, 2, 3], [4, 5, 6], [7, 8, 9]])</span><br><span class="line"><span class="built_in">print</span>(list)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor([[1, 2, 3],</span><br><span class="line">        [4, 5, 6],</span><br><span class="line">        [7, 8, 9]])</span><br></pre></td></tr></table></figure>
+<p>常见的标准算术运算符都可以被升级为按元素运算。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([1.0, 2, 4, 8])</span><br><span class="line">y = torch.tensor([2, 2, 2, 2])</span><br><span class="line">x+y, x-y, x*y, x/y, x**y</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(tensor([ 3.,  4.,  6., 10.]),</span><br><span class="line"> tensor([-1.,  0.,  2.,  6.]),</span><br><span class="line"> tensor([ 2.,  4.,  8., 16.]),</span><br><span class="line"> tensor([0.5000, 1.0000, 2.0000, 4.0000]),</span><br><span class="line"> tensor([ 1.,  4., 16., 64.]))</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
