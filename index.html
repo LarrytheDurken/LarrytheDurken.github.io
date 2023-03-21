@@ -64,6 +64,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-PytorchDL_02_PreProcess" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/03/21/PytorchDL_02_PreProcess/" class="article-date">
+  <time datetime="2023-03-21T14:57:12.000Z" itemprop="datePublished">2023-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/03/21/PytorchDL_02_PreProcess/">Pytorch深度学习-第二节：数据预处理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>创建一个人工数据集，并存储在csv（逗号分隔值）文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line"></span><br><span class="line">os.makedirs(os.path.join(<span class="string">&#x27;..&#x27;</span>, <span class="string">&#x27;data&#x27;</span>), exist_ok=True)</span><br><span class="line">data_file = os.path.join(<span class="string">&#x27;..&#x27;</span>, <span class="string">&#x27;data&#x27;</span>, <span class="string">&#x27;house_tiny.csv&#x27;</span>)</span><br><span class="line">with open(data_file, <span class="string">&#x27;w&#x27;</span>) as f:</span><br><span class="line">    f.write(<span class="string">&#x27;NumRooms,Alley,Price\n&#x27;</span>)</span><br><span class="line">    f.write(<span class="string">&#x27;NA,Pave,127500\n&#x27;</span>)</span><br><span class="line">    f.write(<span class="string">&#x27;2,NA,106000\n&#x27;</span>)</span><br><span class="line">    f.write(<span class="string">&#x27;4,NA,178100\n&#x27;</span>)</span><br><span class="line">    f.write(<span class="string">&#x27;NA,NA,140000\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>从创建的csv文件中加载原始数据集。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line">data = pd.read_csv(data_file)</span><br><span class="line"><span class="built_in">print</span>(data)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   NumRooms Alley   Price</span><br><span class="line">0       NaN  Pave  127500</span><br><span class="line">1       2.0   NaN  106000</span><br><span class="line">2       4.0   NaN  178100</span><br><span class="line">3       NaN   NaN  140000</span><br></pre></td></tr></table></figure>
+
+<p>为了处理缺失的数据，典型的方法包括插值和删除。删除的操作虽然简单，但会减少宝贵的数据，因此最好选择插值。这里，我们就使用插值。<br>我们取出表格的前两列作为输入值，第三列为输出值。<br>首先，对于输入值中属于数值的数据，为所有NaN的数据赋均值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">inputs, outputs = data.iloc[:, 0:2], data.iloc[:, 2]</span><br><span class="line">inputs = inputs.fillna(inputs.mean())</span><br><span class="line"><span class="built_in">print</span>(inputs)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   NumRooms Alley</span><br><span class="line">0       3.0  Pave</span><br><span class="line">1       2.0   NaN</span><br><span class="line">2       4.0   NaN</span><br><span class="line">3       3.0   NaN</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/03/21/PytorchDL_02_PreProcess/" data-id="clfief24s0000b4sth2c9givv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-PytorchDL_01_DataProcess" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2023/03/21/PytorchDL_01_DataProcess/" class="article-date">
@@ -208,6 +255,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2023/03/21/PytorchDL_02_PreProcess/">Pytorch深度学习-第二节：数据预处理</a>
+          </li>
         
           <li>
             <a href="/2023/03/21/PytorchDL_01_DataProcess/">Pytorch深度学习-第一节：数据处理</a>
