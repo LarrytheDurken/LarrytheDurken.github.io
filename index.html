@@ -94,20 +94,24 @@
 <li>每个元素的值：例如全是0，或符合高斯分布的均匀数</li>
 </ul>
 <h2 id="3-访问元素"><a href="#3-访问元素" class="headerlink" title="3.访问元素"></a>3.访问元素</h2><p><img src="/.com//3.png"></p>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>首先，导入<strong>torch</strong>，虽然它被称为PyTorch。</p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>首先，导入<code>torch</code>，虽然它被称为PyTorch。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br></pre></td></tr></table></figure>
 <p>张量表示一个数值组成的数组，这个数组可能有多个维度。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = torch.arange(12)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensor( [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] )</span><br></pre></td></tr></table></figure>
-<p>我们可以通过<strong>shape</strong>属性来访问张量的形状和张良中元素的总数。</p>
+<p>我们可以通过<code>shape</code>属性来访问张量的形状。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x_shape = x.shape</span><br><span class="line"><span class="built_in">print</span>(x_shape)</span><br></pre></td></tr></table></figure>
-
+<p>也可以获取张量中元素的总数。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensor( [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11] )</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x_num = x.numel()</span><br><span class="line"><span class="built_in">print</span>(x_num)</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">12</span><br></pre></td></tr></table></figure>
+
+<p>如果要改变一个张量的形状而不改变元素数量和元素值，可以使用<code>reshape</code>函数。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X = x.reshape(3, 4)</span><br><span class="line"><span class="built_in">print</span>(X)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor([[ 0,  1,  2,  3],</span><br><span class="line">        [ 4,  5,  6,  7],</span><br><span class="line">        [ 8,  9, 10, 11]])</span><br></pre></td></tr></table></figure>
 
       
     </div>
