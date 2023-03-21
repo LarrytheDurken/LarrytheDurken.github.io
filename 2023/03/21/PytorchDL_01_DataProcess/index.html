@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://example.com/.com//2.png">
 <meta property="og:image" content="http://example.com/.com//3.png">
 <meta property="article:published_time" content="2023-03-21T12:35:17.000Z">
-<meta property="article:modified_time" content="2023-03-21T14:16:21.228Z">
+<meta property="article:modified_time" content="2023-03-21T14:28:32.805Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/.com//1.png">
@@ -135,11 +135,42 @@
 <p>通过逻辑与算符构建二元张量。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X == Y</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor( [[False,  True, False,  True],</span><br><span class="line">        [False, False, False, False],</span><br><span class="line">        [False, False, False, False]])</span><br></pre></td></tr></table></figure>
+<p>对张量中的所有元素进行求和会产生一个只有一个元素的张量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X.<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensor(66.)</span><br></pre></td></tr></table></figure>
+
 <p>即使形状不同，我们仍然可以通过调用广播机制来执行按元素操作。<br>广播机制，两个维度相同的张量，当某一张量的某一维元素数低于另一张量时，就进行复制自身来匹配另一张量。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = torch.arange(3).reshape((<span class="number">3</span>, <span class="number">1</span>))</span><br><span class="line">b = torch.arange(2).reshape((<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line">a, b</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(tensor([[0],</span><br><span class="line">         [1],</span><br><span class="line">         [2]]),</span><br><span class="line"> tensor( [[0, 1]]))</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a+b</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor( [[0, 1],</span><br><span class="line">        [1, 2],</span><br><span class="line">        [2, 3]])</span><br></pre></td></tr></table></figure>
+<p>可以用 [-1] 选择最后一个元素，可以用 [1:3] 选择第二个和第三个元素。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X[-1], X[1:3]</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(tensor( [ 8.,  9., 10., 11.]),</span><br><span class="line"> tensor( [[ 4.,  5.,  6.,  7.],</span><br><span class="line">         [ 8.,  9., 10., 11.]]))</span><br></pre></td></tr></table></figure>
+<p>除读取外，我们还可以通过指定索引来将元素写入矩阵。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X [1, 2] = 9</span><br><span class="line">X</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor( [[ 0.,  1.,  2.,  3.],</span><br><span class="line">        [ 4.,  5.,  9.,  7.],</span><br><span class="line">        [ 8.,  9., 10., 11.]])</span><br></pre></td></tr></table></figure>
+<p>也可以为多个元素赋值相同的值，我们只需要索引所有元素，然后为它们赋值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X [0:2, :] = 12</span><br><span class="line">X</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor( [[12., 12., 12., 12.],</span><br><span class="line">        [12., 12., 12., 12.],</span><br><span class="line">        [ 8.,  9., 10., 11.]])</span><br></pre></td></tr></table></figure>
+
+<p>运行一些操作可能会导致为新结果分配内存。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">before = <span class="built_in">id</span>(Y)</span><br><span class="line">Y = Y + X</span><br><span class="line"><span class="built_in">id</span>(Y) == before</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">False</span><br></pre></td></tr></table></figure>
+<p>执行原地操作。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Z = torch.zeros_like(Y)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;id(Z):&#x27;</span>, <span class="built_in">id</span>(Z))</span><br><span class="line">Z[:] = X + Y</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;id(Z):&#x27;</span>, <span class="built_in">id</span>(Z))</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">id</span>(Z): 140452400950336</span><br><span class="line"><span class="built_in">id</span>(Z): 140452400950336</span><br></pre></td></tr></table></figure>
+
+<p>如果在后续计算中没有重复使用 X，我们也可以使用 X[:] = X + Y 或 X += Y 来减少操作的内存开销。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">before = <span class="built_in">id</span>(X)</span><br><span class="line">X += Y</span><br><span class="line"><span class="built_in">id</span>(X) == before</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">True</span><br></pre></td></tr></table></figure>
+
+<p>转换为 NumPy 张量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A = X.numpy()</span><br><span class="line">B = torch.tensor(A)</span><br><span class="line"><span class="built_in">type</span>(A), <span class="built_in">type</span>(B)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(numpy.ndarray, torch.Tensor)</span><br></pre></td></tr></table></figure>
+<p>将大小为1的张量转换为 Python 标量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = torch.tensor([3.5])</span><br><span class="line">a, a.item(), <span class="built_in">float</span>(a), int(a)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(tensor([3.5000]), 3.5, 3.5, 3)</span><br></pre></td></tr></table></figure>
 
       
     </div>
