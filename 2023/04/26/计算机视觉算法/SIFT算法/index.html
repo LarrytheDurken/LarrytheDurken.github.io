@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://example.com/2023/04/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95/SIFT%E7%AE%97%E6%B3%95/1.png">
 <meta property="og:image" content="http://example.com/2023/04/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95/SIFT%E7%AE%97%E6%B3%95/2.png">
 <meta property="article:published_time" content="2023-04-26T02:56:15.000Z">
-<meta property="article:modified_time" content="2023-04-26T06:55:17.280Z">
+<meta property="article:modified_time" content="2023-04-26T11:11:20.136Z">
 <meta property="article:author" content="刘植林">
 <meta property="article:tag" content="cv">
 <meta name="twitter:card" content="summary">
@@ -199,7 +199,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-04-26 10:56:15 / 修改时间：14:55:17" itemprop="dateCreated datePublished" datetime="2023-04-26T10:56:15+08:00">2023-04-26</time>
+      <time title="创建时间：2023-04-26 10:56:15 / 修改时间：19:11:20" itemprop="dateCreated datePublished" datetime="2023-04-26T10:56:15+08:00">2023-04-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -240,13 +240,16 @@
 <li>通过每$2\times 2=4$个像素平均，即可构成$2$级影像级。即，每一级（$2^i$）影像的像素总数对于前一级（$2^{i-1}$）影像以4的倍数缩小（也可以通过$3 \times 3$各平均像素来建立影像级）。如此类推，即可构成多级金字塔影像。</li>
 <li>构成金字塔的层数，应当根据影像的分辨率、影像可能的噪声、影像的大小及相关计算速度来确定。常采用高斯金字塔影像生成算法。<br><img src="1.png" alt></li>
 </ul>
-<h3 id="图像的多尺度空间表达"><a href="#图像的多尺度空间表达" class="headerlink" title="图像的多尺度空间表达"></a>图像的多尺度空间表达</h3><p>对于一个N维信号$f:R^N→R$,它的尺度空间$L:R^N \times R_+ →R$定义为：<br>$L(x:t)=K * f(x, t)$<br>其中$t$为尺度参数，$K$为尺度空间核</p>
+<h3 id="图像的多尺度空间表达"><a href="#图像的多尺度空间表达" class="headerlink" title="图像的多尺度空间表达"></a>图像的多尺度空间表达</h3><p>对于一个N维信号$f:R^N→R$,它的尺度空间$L:R^N \times R_+ →R$定义为：</p>
+<p><center>$L(x:t)=K * f(x, t)$</center><br>其中$t$为尺度参数，$K$为尺度空间核</p>
 <ul>
 <li>尺度空间也可描述为$(x, \sigma)$空间，$x$和$\sigma$分别为位置参数和尺度参数。</li>
 <li>尺度参数可以是离散的，也可以是连续的。</li>
 <li>所有尺度上空间采样点个数是相同的(尺度空间表示法在各个尺度上图像的分辨率都是一样的)。</li>
 </ul>
-<h3 id="高斯尺度空间"><a href="#高斯尺度空间" class="headerlink" title="高斯尺度空间"></a>高斯尺度空间</h3><p>高斯函数作为卷积核生成的尺度空间是目前最完善的尺度空间之一，一幅二维图像的高斯尺度空间可表示为：<br>$L(x,y,\sigma)=G(x,y,\sigma)*I(x,y)$<br>其中，$I(x,y)$为原图像，$x$，$y$为像素点坐标，$\sigma$为尺度参数<br>$G(x,y,\sigma)=\frac{1}{2\pi \sigma^2}e^{-\frac{(x^2+y^2)}{2\sigma^2}}$</p>
+<h3 id="高斯尺度空间"><a href="#高斯尺度空间" class="headerlink" title="高斯尺度空间"></a>高斯尺度空间</h3><p>高斯函数作为卷积核生成的尺度空间是目前最完善的尺度空间之一，一幅二维图像的高斯尺度空间可表示为：</p>
+<p><center>$L(x,y,\sigma)=G(x,y,\sigma)*I(x,y)$</center><br>其中，$I(x,y)$为原图像，$x$，$y$为像素点坐标，$\sigma$为尺度参数</p>
+<p><center>$G(x,y,\sigma)=\frac{1}{2\pi \sigma^2}e^{-\frac{(x^2+y^2)}{2\sigma^2}}$</center></p>
 <ul>
 <li>当采用不同尺度的平滑函数对同一图像进行滤波时，得到的一簇图像就是原始图像相对于该平滑函数的尺度空间，$\sigma$为尺度空间坐标。</li>
 <li>构建高斯尺度空间的主要思想是在精细尺度上的信息随着尺度参数值的增加而逐渐地被抑制，尺度从粗到细的变化中，不会产生新结构。</li>
