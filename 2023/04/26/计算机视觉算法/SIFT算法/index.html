@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="先对尺度空间进行介绍，然后阐述SIFT算法的基本原理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SIFT算法">
+<meta property="og:url" content="http://example.com/2023/04/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95/SIFT%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="码林">
+<meta property="og:description" content="先对尺度空间进行介绍，然后阐述SIFT算法的基本原理。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/04/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95/SIFT%E7%AE%97%E6%B3%95/1.png">
+<meta property="og:image" content="http://example.com/2023/04/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95/SIFT%E7%AE%97%E6%B3%95/2.png">
+<meta property="article:published_time" content="2023-04-26T02:56:15.000Z">
+<meta property="article:modified_time" content="2023-04-26T06:55:17.280Z">
+<meta property="article:author" content="刘植林">
+<meta property="article:tag" content="cv">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/04/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95/SIFT%E7%AE%97%E6%B3%95/1.png">
+
+
+<link rel="canonical" href="http://example.com/2023/04/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95/SIFT%E7%AE%97%E6%B3%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/04/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95/SIFT%E7%AE%97%E6%B3%95/","path":"2023/04/26/计算机视觉算法/SIFT算法/","title":"SIFT算法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SIFT算法 | 码林</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">码林</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">刘植林，留植林。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">3</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SIFT%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">SIFT基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%BA%E5%BA%A6"><span class="nav-number">1.1.</span> <span class="nav-text">尺度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%BA%E5%BA%A6%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">尺度的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%AE%A8%E8%AE%BA%E5%B0%BA%E5%BA%A6%E7%A9%BA%E9%97%B4"><span class="nav-number">1.1.2.</span> <span class="nav-text">为什么要讨论尺度空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%86%E8%A7%89%E9%A2%86%E5%9F%9F%E7%9A%84%E5%B0%BA%E5%BA%A6%E7%A9%BA%E9%97%B4%E7%90%86%E8%AE%BA"><span class="nav-number">1.1.3.</span> <span class="nav-text">视觉领域的尺度空间理论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%BA%E5%BA%A6%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">尺度表示方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%91%E5%AD%97%E5%A1%94%E5%BD%B1%E5%83%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">金字塔影像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E7%9A%84%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%A9%BA%E9%97%B4%E8%A1%A8%E8%BE%BE"><span class="nav-number">1.2.2.</span> <span class="nav-text">图像的多尺度空间表达</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E6%96%AF%E5%B0%BA%E5%BA%A6%E7%A9%BA%E9%97%B4"><span class="nav-number">1.2.3.</span> <span class="nav-text">高斯尺度空间</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="刘植林"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">刘植林</p>
+  <div class="site-description" itemprop="description">No gain,no pain.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95/SIFT%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="刘植林">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="码林">
+      <meta itemprop="description" content="No gain,no pain.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SIFT算法 | 码林">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SIFT算法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-04-26 10:56:15 / 修改时间：14:55:17" itemprop="dateCreated datePublished" datetime="2023-04-26T10:56:15+08:00">2023-04-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">计算机视觉算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center>先对尺度空间进行介绍，然后阐述SIFT算法的基本原理。</center>
+
+<span id="more"></span>
+<h1 id="SIFT基础"><a href="#SIFT基础" class="headerlink" title="SIFT基础"></a>SIFT基础</h1><h2 id="尺度"><a href="#尺度" class="headerlink" title="尺度"></a>尺度</h2><h3 id="尺度的定义"><a href="#尺度的定义" class="headerlink" title="尺度的定义"></a>尺度的定义</h3><p>现实世界的物体由不同尺度的结构所组成，在人的视觉中，对物体观察的尺度不同，物体的呈现方式也不同。从测量的角度来说，对物体的测量数据必然是依赖于某个尺度的，例如在测量一个人的身高时，我们常以厘米为基本单位，但测量机械零件的尺寸时，就要精确到微米甚至纳米。</p>
+<h3 id="为什么要讨论尺度空间"><a href="#为什么要讨论尺度空间" class="headerlink" title="为什么要讨论尺度空间"></a>为什么要讨论尺度空间</h3><p>对计算机视觉而言，用机器视觉系统分析未知场景时，计算机并不预先知道图像中物体的尺度。我们需要同时考虑图像在多尺度下的描述，获知物体的最佳尺度。<br>另外，如果不同的尺度下都有同样的关键点，那么在不同尺度的输入图像则都可以检测出来关键点匹配，也就是尺度不变性。</p>
+<h3 id="视觉领域的尺度空间理论"><a href="#视觉领域的尺度空间理论" class="headerlink" title="视觉领域的尺度空间理论"></a>视觉领域的尺度空间理论</h3><ul>
+<li>基本思想：在图像信息处理模型中引入一个被视为尺度的参数，通过<strong>连续变化尺度参数</strong>获得不同尺度下的视觉处理信息，然后综合这些信息以深入地挖掘图像的本质特征。</li>
+<li>尺度空间方法将传统的单尺度视觉信息处理技术纳入尺度不断变化的动态分析框架中，因此更容易获得图像的本质特征。</li>
+<li>图像的尺度空间表达指的是图像在所有尺度下的描述。</li>
+</ul>
+<p>具体操作中，尺度空间理论是通过对原始图像进行尺度变换，获得图像多尺度下的尺度空间表示序列，对这些序列进行尺度空间主轮廓的提取，并以该主轮廓作为一种特征向量，实现边缘、角点检测和不同分辨率上的特征提取等。</p>
+<h2 id="尺度表示方法"><a href="#尺度表示方法" class="headerlink" title="尺度表示方法"></a>尺度表示方法</h2><h3 id="金字塔影像"><a href="#金字塔影像" class="headerlink" title="金字塔影像"></a>金字塔影像</h3><p>金字塔影像是一种较经典的尺度表示方法，结合了降采样操作和平滑处理，它的一个很大的好处是：自下而上每一层的像素数都不断减少，这会大大减少计算量，而缺点是这种自下而上的金字塔在尺度量化方向显得较为粗糙。</p>
+<ul>
+<li>图像金字塔是以多分辨率来解释图像的一种结构。</li>
+<li>一般按照$2^n(n=0,1,2…)$取平均得到。</li>
+<li>最底层的影像对应原始影像。</li>
+<li>通过每$2\times 2=4$个像素平均，即可构成$2$级影像级。即，每一级（$2^i$）影像的像素总数对于前一级（$2^{i-1}$）影像以4的倍数缩小（也可以通过$3 \times 3$各平均像素来建立影像级）。如此类推，即可构成多级金字塔影像。</li>
+<li>构成金字塔的层数，应当根据影像的分辨率、影像可能的噪声、影像的大小及相关计算速度来确定。常采用高斯金字塔影像生成算法。<br><img src="1.png" alt></li>
+</ul>
+<h3 id="图像的多尺度空间表达"><a href="#图像的多尺度空间表达" class="headerlink" title="图像的多尺度空间表达"></a>图像的多尺度空间表达</h3><p>对于一个N维信号$f:R^N→R$,它的尺度空间$L:R^N \times R_+ →R$定义为：<br>$L(x:t)=K * f(x, t)$<br>其中$t$为尺度参数，$K$为尺度空间核</p>
+<ul>
+<li>尺度空间也可描述为$(x, \sigma)$空间，$x$和$\sigma$分别为位置参数和尺度参数。</li>
+<li>尺度参数可以是离散的，也可以是连续的。</li>
+<li>所有尺度上空间采样点个数是相同的(尺度空间表示法在各个尺度上图像的分辨率都是一样的)。</li>
+</ul>
+<h3 id="高斯尺度空间"><a href="#高斯尺度空间" class="headerlink" title="高斯尺度空间"></a>高斯尺度空间</h3><p>高斯函数作为卷积核生成的尺度空间是目前最完善的尺度空间之一，一幅二维图像的高斯尺度空间可表示为：<br>$L(x,y,\sigma)=G(x,y,\sigma)*I(x,y)$<br>其中，$I(x,y)$为原图像，$x$，$y$为像素点坐标，$\sigma$为尺度参数<br>$G(x,y,\sigma)=\frac{1}{2\pi \sigma^2}e^{-\frac{(x^2+y^2)}{2\sigma^2}}$</p>
+<ul>
+<li>当采用不同尺度的平滑函数对同一图像进行滤波时，得到的一簇图像就是原始图像相对于该平滑函数的尺度空间，$\sigma$为尺度空间坐标。</li>
+<li>构建高斯尺度空间的主要思想是在精细尺度上的信息随着尺度参数值的增加而逐渐地被抑制，尺度从粗到细的变化中，不会产生新结构。</li>
+<li>在高斯尺度空间下，只是对图像作了卷积，图像的分辨率和像素仍然没有改变，只是细节平滑了，而传统的影像金字塔关键在降采样，降低了图像分辨率。<br><img src="2.png" alt></li>
+<li>高斯尺度空间表示了图像在不同尺度下的低频信号，而代表边缘以及角点等特征的高频信号丢失。可以在不同分辨率层上通过在不同的尺度上应用合适的函数来表示一个特征（如边缘和角点）。</li>
+<li>同一类型特征点和边缘在不同的尺度上具有因果性，即当尺度变化时，新的特征点可能出现，而老的特征点可能移位或消失。这种因果性带来的含糊性是固有、不可避免、无法消除，但能减小的。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">---------------------本文结束---------------------</div>
+    
+</div>
+  
+</div>
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/cv/" rel="tag"><i class="fa fa-tag"></i>cv</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/21/%E6%9D%8E%E6%B2%90pytorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_02_PreProcess/" rel="prev" title="Pytorch深度学习-第二节：数据预处理">
+                  <i class="fa fa-chevron-left"></i> Pytorch深度学习-第二节：数据预处理
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-tree"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李林晁</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"mhchem":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

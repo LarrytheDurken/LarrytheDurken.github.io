@@ -22,7 +22,7 @@
     <meta name="description" content="数据预处理的简单案例，包括读取数据、通过插值方法处理数据缺失值。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pytorch深度学习-第二节：数据预处理">
-<meta property="og:url" content="http://example.com/2023/03/21/PytorchDL_02_PreProcess/index.html">
+<meta property="og:url" content="http://example.com/2023/03/21/%E6%9D%8E%E6%B2%90pytorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_02_PreProcess/index.html">
 <meta property="og:site_name" content="码林">
 <meta property="og:description" content="数据预处理的简单案例，包括读取数据、通过插值方法处理数据缺失值。">
 <meta property="og:locale" content="zh_CN">
@@ -34,11 +34,11 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2023/03/21/PytorchDL_02_PreProcess/">
+<link rel="canonical" href="http://example.com/2023/03/21/%E6%9D%8E%E6%B2%90pytorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_02_PreProcess/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/03/21/PytorchDL_02_PreProcess/","path":"2023/03/21/PytorchDL_02_PreProcess/","title":"Pytorch深度学习-第二节：数据预处理"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/03/21/%E6%9D%8E%E6%B2%90pytorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_02_PreProcess/","path":"2023/03/21/李沐pytorch深度学习/PytorchDL_02_PreProcess/","title":"Pytorch深度学习-第二节：数据预处理"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Pytorch深度学习-第二节：数据预处理 | 码林</title>
@@ -89,7 +89,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">1</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">2</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">3</span></a></li>
   </ul>
 </nav>
 
@@ -129,18 +129,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -167,7 +167,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/21/PytorchDL_02_PreProcess/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/21/%E6%9D%8E%E6%B2%90pytorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_02_PreProcess/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -228,28 +228,18 @@
         <center>数据预处理的简单案例，包括读取数据、通过插值方法处理数据缺失值。</center>
 
 <span id="more"></span>
-
 <h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><h2 id="创建数据集"><a href="#创建数据集" class="headerlink" title="创建数据集"></a>创建数据集</h2><p>创建一个人工数据集，并存储在csv（逗号分隔值）文件。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">os.makedirs(os.path.join(<span class="string">&#x27;..&#x27;</span>, <span class="string">&#x27;data&#x27;</span>), exist_ok=<span class="literal">True</span>)</span><br><span class="line">data_file = os.path.join(<span class="string">&#x27;..&#x27;</span>, <span class="string">&#x27;data&#x27;</span>, <span class="string">&#x27;house_tiny.csv&#x27;</span>)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(data_file, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">&#x27;NumRooms,Alley,Price\n&#x27;</span>)</span><br><span class="line">    f.write(<span class="string">&#x27;NA,Pave,127500\n&#x27;</span>)</span><br><span class="line">    f.write(<span class="string">&#x27;2,NA,106000\n&#x27;</span>)</span><br><span class="line">    f.write(<span class="string">&#x27;4,NA,178100\n&#x27;</span>)</span><br><span class="line">    f.write(<span class="string">&#x27;NA,NA,140000\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
 <h2 id="加载数据集"><a href="#加载数据集" class="headerlink" title="加载数据集"></a>加载数据集</h2><p>从创建的csv文件中加载原始数据集。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">data = pd.read_csv(data_file)</span><br><span class="line"><span class="built_in">print</span>(data)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   NumRooms Alley   Price</span><br><span class="line"><span class="number">0</span>       NaN  Pave  <span class="number">127500</span></span><br><span class="line"><span class="number">1</span>       <span class="number">2.0</span>   NaN  <span class="number">106000</span></span><br><span class="line"><span class="number">2</span>       <span class="number">4.0</span>   NaN  <span class="number">178100</span></span><br><span class="line"><span class="number">3</span>       NaN   NaN  <span class="number">140000</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="缺失数据处理"><a href="#缺失数据处理" class="headerlink" title="缺失数据处理"></a>缺失数据处理</h2><p>为了处理缺失的数据，典型的方法包括插值和删除。<br>删除的操作虽然简单，但会减少宝贵的数据，因此最好选择插值。这里，我们就使用插值。<br>我们取出表格的前两列作为输入值，第三列为输出值。<br>首先，对于输入值中属于数值的数据，为所有NaN的数据赋均值。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">inputs, outputs = data.iloc[:, <span class="number">0</span>:<span class="number">2</span>], data.iloc[:, <span class="number">2</span>]</span><br><span class="line">inputs = inputs.fillna(inputs.mean())</span><br><span class="line"><span class="built_in">print</span>(inputs)</span><br></pre></td></tr></table></figure>
-
+<h2 id="缺失数据处理"><a href="#缺失数据处理" class="headerlink" title="缺失数据处理"></a>缺失数据处理</h2><p>为了处理缺失的数据，典型的方法包括插值和删除。<br>删除的操作虽然简单，但会减少宝贵的数据，因此最好选择插值。这里，我们就使用插值。<br>我们取出表格的前两列作为输入值，第三列为输出值。<br>首先，对于输入值中属于数值的数据，为所有NaN的数据赋均值。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">inputs, outputs = data.iloc[:, <span class="number">0</span>:<span class="number">2</span>], data.iloc[:, <span class="number">2</span>]</span><br><span class="line">inputs = inputs.fillna(inputs.mean())</span><br><span class="line"><span class="built_in">print</span>(inputs)</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   NumRooms Alley</span><br><span class="line"><span class="number">0</span>       <span class="number">3.0</span>  Pave</span><br><span class="line"><span class="number">1</span>       <span class="number">2.0</span>   NaN</span><br><span class="line"><span class="number">2</span>       <span class="number">4.0</span>   NaN</span><br><span class="line"><span class="number">3</span>       <span class="number">3.0</span>   NaN</span><br></pre></td></tr></table></figure>
-
 <p>对于输入值中的类别值，我们将“NaN”视为一个类别赋值。<br>如上述表格的<code>Alley</code>表项，如果值为<code>Pave</code>,就赋为1，否则为0。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">inputs = pd.get_dummies(inputs, dummy_na=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(inputs)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   NumRooms  Alley_Pave  Alley_nan</span><br><span class="line"><span class="number">0</span>       <span class="number">3.0</span>           <span class="number">1</span>          <span class="number">0</span></span><br><span class="line"><span class="number">1</span>       <span class="number">2.0</span>           <span class="number">0</span>          <span class="number">1</span></span><br><span class="line"><span class="number">2</span>       <span class="number">4.0</span>           <span class="number">0</span>          <span class="number">1</span></span><br><span class="line"><span class="number">3</span>       <span class="number">3.0</span>           <span class="number">0</span>          <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
 <p>现在输入值和输出值中所有条目都为数值类型，就可以转换为张量形式了。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">X, y = torch.tensor(inputs.values), torch.tensor(outputs.values)</span><br><span class="line">X, y</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(tensor([[<span class="number">3.</span>, <span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">         [<span class="number">2.</span>, <span class="number">0.</span>, <span class="number">1.</span>],</span><br><span class="line">         [<span class="number">4.</span>, <span class="number">0.</span>, <span class="number">1.</span>],</span><br><span class="line">         [<span class="number">3.</span>, <span class="number">0.</span>, <span class="number">1.</span>]], dtype=torch.float64),</span><br><span class="line"> tensor([<span class="number">127500</span>, <span class="number">106000</span>, <span class="number">178100</span>, <span class="number">140000</span>]))</span><br></pre></td></tr></table></figure>
 
     </div>
@@ -278,11 +268,14 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/03/21/PytorchDL_01_DataProcess/" rel="prev" title="Pytorch深度学习-第一节：数据处理">
+                <a href="/2023/03/21/%E6%9D%8E%E6%B2%90pytorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_01_DataProcess/" rel="prev" title="Pytorch深度学习-第一节：数据处理">
                   <i class="fa fa-chevron-left"></i> Pytorch深度学习-第一节：数据处理
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2023/04/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95/SIFT%E7%AE%97%E6%B3%95/" rel="next" title="SIFT算法">
+                  SIFT算法 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -336,6 +329,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"mhchem":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 
