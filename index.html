@@ -85,7 +85,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">6</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">8</span></a></li>
   </ul>
 </nav>
 
@@ -124,7 +124,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -161,7 +161,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/03/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_05_SimpleNet/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/05/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_4.2_Visualize/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -179,7 +179,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/06/03/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_05_SimpleNet/" class="post-title-link" itemprop="url">Pytorch深度学习-第五节：简单神经网络</a>
+          <a href="/2023/06/05/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_4.2_Visualize/" class="post-title-link" itemprop="url">Pytorch深度学习-第4.2节：数据可视化</a>
         </h2>
 
         <div class="post-meta-container">
@@ -189,15 +189,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-06-03 20:46:23" itemprop="dateCreated datePublished" datetime="2023-06-03T20:46:23+08:00">2023-06-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-06-04 14:44:56" itemprop="dateModified" datetime="2023-06-04T14:44:56+08:00">2023-06-04</time>
+      <time title="创建时间：2023-06-05 01:42:23 / 修改时间：01:45:41" itemprop="dateCreated datePublished" datetime="2023-06-05T01:42:23+08:00">2023-06-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -219,10 +213,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <center>搭建一个简单的单层神经网络，同时介绍一些基本概念。</center>
+          <center>通过tensorboard实现数据集的可视化，并用代码演示。</center>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/06/03/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_05_SimpleNet/#more" rel="contents">
+              <a class="btn" href="/2023/06/05/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_4.2_Visualize/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -257,7 +251,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/11/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_04_AutoGra/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/04/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_4.1_LoadData/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -275,7 +269,199 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/11/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_04_AutoGra/" class="post-title-link" itemprop="url">Pytorch深度学习-第四节：自动求导</a>
+          <a href="/2023/06/04/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_4.1_LoadData/" class="post-title-link" itemprop="url">Pytorch深度学习-第4.1节：加载数据（1）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-06-04 16:34:23" itemprop="dateCreated datePublished" datetime="2023-06-04T16:34:23+08:00">2023-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-06-05 01:41:19" itemprop="dateModified" datetime="2023-06-05T01:41:19+08:00">2023-06-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/pytorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">pytorch深度学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <center>在pytorch中读取数据集并操作数据集的具体代码，主要介绍Dataset和DataLoader这两个比较关键的类。着重演示了构建Dataset类的基本流程。</center>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/06/04/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_4.1_LoadData/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/03/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_04_SimpleNet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="刘植林">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="码林">
+      <meta itemprop="description" content="No gain,no pain.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 码林">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/06/03/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_04_SimpleNet/" class="post-title-link" itemprop="url">Pytorch深度学习-第四节：神经网络</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-06-03 20:46:23" itemprop="dateCreated datePublished" datetime="2023-06-03T20:46:23+08:00">2023-06-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-06-04 16:30:04" itemprop="dateModified" datetime="2023-06-04T16:30:04+08:00">2023-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/pytorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">pytorch深度学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <center>从最简单的单层线性网络介绍神经网络的概念，同时然后再介绍通过激活函数实现更一般的网络，在其中阐述一些基本概念。</center>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/06/03/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_04_SimpleNet/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+<div>
+  
+</div>
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/11/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_03_AutoGra/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="刘植林">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="码林">
+      <meta itemprop="description" content="No gain,no pain.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 码林">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/11/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_03_AutoGra/" class="post-title-link" itemprop="url">Pytorch深度学习-第三节：自动求导</a>
         </h2>
 
         <div class="post-meta-container">
@@ -293,7 +479,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-06-03 20:46:02" itemprop="dateModified" datetime="2023-06-03T20:46:02+08:00">2023-06-03</time>
+      <time title="修改时间：2023-06-04 16:30:00" itemprop="dateModified" datetime="2023-06-04T16:30:00+08:00">2023-06-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -318,7 +504,7 @@
           <center>自动求导的理论与代码。</center>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/11/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_04_AutoGra/#more" rel="contents">
+              <a class="btn" href="/2023/05/11/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_03_AutoGra/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -353,7 +539,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/10/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_03_MatCal/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/10/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_02_MatCal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -371,7 +557,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/10/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_03_MatCal/" class="post-title-link" itemprop="url">Pytorch深度学习-第三节：矩阵运算</a>
+          <a href="/2023/05/10/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_02_MatCal/" class="post-title-link" itemprop="url">Pytorch深度学习-第二节：矩阵运算</a>
         </h2>
 
         <div class="post-meta-container">
@@ -389,7 +575,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-06-03 20:47:07" itemprop="dateModified" datetime="2023-06-03T20:47:07+08:00">2023-06-03</time>
+      <time title="修改时间：2023-06-04 16:28:52" itemprop="dateModified" datetime="2023-06-04T16:28:52+08:00">2023-06-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -414,7 +600,7 @@
           <center>矩阵的运算，主要是矩阵求导</center>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/10/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_03_MatCal/#more" rel="contents">
+              <a class="btn" href="/2023/05/10/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_02_MatCal/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -545,7 +731,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/21/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_02_PreProcess/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/21/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_1.1_PreProcess/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -563,7 +749,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/03/21/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_02_PreProcess/" class="post-title-link" itemprop="url">Pytorch深度学习-第二节：数据预处理</a>
+          <a href="/2023/03/21/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_1.1_PreProcess/" class="post-title-link" itemprop="url">Pytorch深度学习-1.1节：数据预处理</a>
         </h2>
 
         <div class="post-meta-container">
@@ -581,7 +767,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-06-03 20:47:14" itemprop="dateModified" datetime="2023-06-03T20:47:14+08:00">2023-06-03</time>
+      <time title="修改时间：2023-06-05 01:40:07" itemprop="dateModified" datetime="2023-06-05T01:40:07+08:00">2023-06-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -606,7 +792,7 @@
           <center>数据预处理的简单案例，包括读取数据、通过插值方法处理数据缺失值。</center>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/03/21/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_02_PreProcess/#more" rel="contents">
+              <a class="btn" href="/2023/03/21/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_1.1_PreProcess/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
