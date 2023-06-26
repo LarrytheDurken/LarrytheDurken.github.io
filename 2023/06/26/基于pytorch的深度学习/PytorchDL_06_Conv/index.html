@@ -22,31 +22,31 @@
     <meta name="description" content="介绍神经网络中卷积层的概念，包括卷积的填充、步长和池化操作。同时对比卷积和全连接层的区别。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pytorch深度学习-第六节：卷积神经网络">
-<meta property="og:url" content="http://example.com/2023/06/07/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/index.html">
+<meta property="og:url" content="http://example.com/2023/06/26/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/index.html">
 <meta property="og:site_name" content="码林">
 <meta property="og:description" content="介绍神经网络中卷积层的概念，包括卷积的填充、步长和池化操作。同时对比卷积和全连接层的区别。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/06/07/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/1.png">
-<meta property="og:image" content="http://example.com/2023/06/07/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/2.png">
-<meta property="og:image" content="http://example.com/2023/06/07/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/3.png">
-<meta property="og:image" content="http://example.com/2023/06/07/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/4.png">
-<meta property="og:image" content="http://example.com/2023/06/07/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/5.png">
-<meta property="og:image" content="http://example.com/2023/06/07/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/6.png">
-<meta property="og:image" content="http://example.com/2023/06/07/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/7.png">
-<meta property="article:published_time" content="2023-06-07T02:30:23.000Z">
-<meta property="article:modified_time" content="2023-06-10T03:28:19.581Z">
+<meta property="og:image" content="http://example.com/2023/06/26/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/1.png">
+<meta property="og:image" content="http://example.com/2023/06/26/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/2.png">
+<meta property="og:image" content="http://example.com/2023/06/26/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/3.png">
+<meta property="og:image" content="http://example.com/2023/06/26/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/4.png">
+<meta property="og:image" content="http://example.com/2023/06/26/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/5.png">
+<meta property="og:image" content="http://example.com/2023/06/26/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/6.png">
+<meta property="og:image" content="http://example.com/2023/06/26/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/7.png">
+<meta property="article:published_time" content="2023-06-26T13:38:23.000Z">
+<meta property="article:modified_time" content="2023-06-26T14:47:48.899Z">
 <meta property="article:author" content="刘植林">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="pytorch">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/06/07/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/1.png">
+<meta name="twitter:image" content="http://example.com/2023/06/26/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/1.png">
 
 
-<link rel="canonical" href="http://example.com/2023/06/07/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/">
+<link rel="canonical" href="http://example.com/2023/06/26/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/06/07/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/","path":"2023/06/07/基于pytorch的深度学习/PytorchDL_06_Conv/","title":"Pytorch深度学习-第六节：卷积神经网络"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/06/26/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/","path":"2023/06/26/基于pytorch的深度学习/PytorchDL_06_Conv/","title":"Pytorch深度学习-第六节：卷积神经网络"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Pytorch深度学习-第六节：卷积神经网络 | 码林</title>
@@ -97,7 +97,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">11</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a></li>
   </ul>
 </nav>
 
@@ -137,7 +137,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,7 +175,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/07/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/26/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_06_Conv/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -203,15 +203,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-06-07 10:30:23" itemprop="dateCreated datePublished" datetime="2023-06-07T10:30:23+08:00">2023-06-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-06-10 11:28:19" itemprop="dateModified" datetime="2023-06-10T11:28:19+08:00">2023-06-10</time>
+      <time title="创建时间：2023-06-26 21:38:23 / 修改时间：22:47:48" itemprop="dateCreated datePublished" datetime="2023-06-26T21:38:23+08:00">2023-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -236,7 +230,7 @@
         <center>介绍神经网络中卷积层的概念，包括卷积的填充、步长和池化操作。同时对比卷积和全连接层的区别。</center>
 
 <span id="more"></span>
-<h1 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h1><h2 id="二维图像卷积"><a href="#二维图像卷积" class="headerlink" title="二维图像卷积"></a>二维图像卷积</h2><p>卷积是个错误叫法，实际运算其实是互相关运算。<br>在⼆维互相关运算中，卷积窗⼝从输⼊张量的左上⻆开始，从左到右、从上到下滑动。当卷积窗⼝滑动到新⼀个位置时，包含在该窗⼝中的部分张量与卷积核张量进⾏按元素相乘，得到的张量再求和得到⼀个单⼀的标量值，由此我们得出了这⼀位置的输出张量值。如：</p>
+<h1 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h1><h2 id="二维图像卷积"><a href="#二维图像卷积" class="headerlink" title="二维图像卷积"></a>二维图像卷积</h2><p>卷积是个错误叫法，实际运算其实是互相关运算。<br>在⼆维互相关运算中，卷积窗口从输⼊张量的左上角开始，从左到右、从上到下滑动。当卷积窗口滑动到新⼀个位置时，包含在该窗口中的部分张量与卷积核张量进行按元素相乘，得到的张量再求和得到⼀个单⼀的标量值，由此我们得出了这⼀位置的输出张量值。如：</p>
 <p><div style="width: 300px; margin: auto"><img src="1.png" alt></div></p>
 <p>即：</p>
 <center>$0 \times 0 + 1 \times 1 + 3 \times 2 + 4 \times 3 = 19$</center>
@@ -250,32 +244,33 @@
 <p>假设图像有$n_h$行$n_w$列，卷积核有$k_h$行$k_w$列，添加$p_h$行$p_w$列，则输出形状为：</p>
 <center>$(n_h-k_h+p_h+1) \times (n_w-k_w+p_w+1)$</center>
 
-<p>卷积神经⽹络中卷积核的⾼度和宽度通常为奇数，例如1、3、5或7。选择奇数的好处是，保持空间维度的同时，我们可以在顶部和底部填充相同数量的⾏，在左侧和右侧填充相同数量的列。</p>
-<h2 id="步长"><a href="#步长" class="headerlink" title="步长"></a>步长</h2><p>在前⾯的例⼦中，我们默认每次滑动⼀个元素。但是，有时候为了⾼效计算或是缩减采样次数，卷积窗⼝可以跳过中间位置，每次滑动多个元素。<br>我们将每次滑动元素的数量称为步幅（stride）。下图就是垂直步幅为3，⽔平步幅为2的⼆维互相关运算。着⾊部分是输出元素以及⽤于输出计算的输⼊和内核张量元素。</p>
+<p>卷积神经网络中卷积核的高度和宽度通常为奇数，例如1、3、5或7。选择奇数的好处是，保持空间维度的同时，我们可以在顶部和底部填充相同数量的行，在左侧和右侧填充相同数量的列。</p>
+<h2 id="步长"><a href="#步长" class="headerlink" title="步长"></a>步长</h2><p>在前面的例子中，我们默认每次滑动⼀个元素。但是，有时候为了高效计算或是缩减采样次数，卷积窗口可以跳过中间位置，每次滑动多个元素。<br>我们将每次滑动元素的数量称为步幅（stride）。下图就是垂直步幅为3，⽔平步幅为2的⼆维互相关运算。着色部分是输出元素以及⽤于输出计算的输⼊和内核张量元素。</p>
 <p><div style="width: 400px; margin: auto"><img src="3.png" alt></div></p>
 <p>当垂直步幅为$s_h$、⽔平步幅为$s_w$时，输出形状为:</p>
 <center>$[(n_h-k_h+p_h+1)/s_h] \times [(n_w-k_w+p_w+1)/s_w]$</center>
 
-<h2 id="三维图像卷积"><a href="#三维图像卷积" class="headerlink" title="三维图像卷积"></a>三维图像卷积</h2><p>当输⼊包含多个通道时，需要构造⼀个与输⼊数据具有相同输⼊通道数的卷积核，以便与输⼊数据进⾏互相关运算。<br>输入输⼊有$c_i$个通道，那么卷积核也应有$c_i$个通道。然后以对每个通道输⼊的⼆维张量和卷积核的⼆维张量进⾏互相关运算，再对通道求和（将$c_i$的结果相加）得到⼆维张量。</p>
+<h2 id="三维图像卷积"><a href="#三维图像卷积" class="headerlink" title="三维图像卷积"></a>三维图像卷积</h2><p>当输入包含多个通道时，需要构造一个与输⼊数据具有相同输入通道数的卷积核，以便与输⼊数据进行互相关运算。<br>输入输⼊有$c_i$个通道，那么卷积核也应有$c_i$个通道。然后以对每个通道输⼊的二维张量和卷积核的二维张量进⾏互相关运算，再对通道求和（将$c_i$的结果相加）得到二维张量。</p>
 <p><div style="width: 400px; margin: auto"><img src="4.png" alt></div></p>
 <h1 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h1><h2 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a>卷积层</h2><p><div style="width: 400px; margin: auto"><img src="5.png" alt></div></p>
 <p>如图就是一个独立的卷积层，其包含两个神经元（有两个不同的核函数）。注意，卷积层输出的通道数仅取决于神经元个数。<br>不同的神经元可以代表不同的处理，比如第一个神经元的核函数可以代表图像水平边缘，第二个神经元的核函数可以代表图像垂直边缘，通过这两个特性来实现图像的边缘特征提取。</p>
-<h2 id="池化层（汇聚层）"><a href="#池化层（汇聚层）" class="headerlink" title="池化层（汇聚层）"></a>池化层（汇聚层）</h2><p>与卷积层类似，池化层运算符由⼀个固定形状的窗⼝组成，该窗⼝根据其步幅⼤⼩在输⼊的所有区域上滑动，为固定形状窗⼝遍历的每个位置计算⼀个输出。然⽽，不同于卷积层中的输⼊与卷积核之间的互相关计算，汇聚层不包含参数。相反，池运算是确定性的，我们通常计算汇聚窗⼝中所有元素的最⼤值或平均值。这些操作分别称为最⼤池化层（maximum pooling）和平均池化层（average pooling）。</p>
+<h2 id="池化层（汇聚层）"><a href="#池化层（汇聚层）" class="headerlink" title="池化层（汇聚层）"></a>池化层（汇聚层）</h2><p>与卷积层类似，池化层运算符由⼀个固定形状的窗⼝组成，该窗口根据其步幅大小在输⼊的所有区域上滑动，为固定形状窗⼝遍历的每个位置计算一个输出。然而，不同于卷积层中的输入与卷积核之间的互相关计算，汇聚层不包含参数。相反，池运算是确定性的，我们通常计算汇聚窗口中所有元素的最大值或平均值。这些操作分别称为最大池化层（maximum pooling）和平均池化层（average pooling）。</p>
 <p><div style="width: 400px; margin: auto"><img src="6.png" alt></div></p>
 <p>对于池化层的机制，以最大池化层为例，某种解释是它提取了图像局部特征中最主要的特征（最大值），所以可以提升神经网络的效果。<br>但实际上池化层为何有效并没有十分确切的答案，只能说是基于经验来看它确实有效。</p>
-<h2 id="卷积神经网络（Lenet）"><a href="#卷积神经网络（Lenet）" class="headerlink" title="卷积神经网络（Lenet）"></a>卷积神经网络（Lenet）</h2><p>Lenet是最早发布的卷积神经网络之一，⽬的是识别图像中的⼿写数字。<br>总体来看，LeNet由两个部分组成：</p>
+<h2 id="卷积神经网络（Lenet）"><a href="#卷积神经网络（Lenet）" class="headerlink" title="卷积神经网络（Lenet）"></a>卷积神经网络（Lenet）</h2><p>Lenet是最早发布的卷积神经网络之一，目的是识别图像中的手写数字。<br>总体来看，LeNet由两个部分组成：</p>
 <ul>
 <li>卷积编码器：由两个卷积层组成,负责学习图片空间特征</li>
 <li>全连接层密集块：由三个全连接层组成，负责将图片转换为类别空间</li>
 </ul>
 <p><div style="width: 600px; margin: auto"><img src="7.png" alt></div></p>
-<p>每个卷积块中的基本单元是⼀个卷积层、⼀个sigmoid激活函数和平均汇聚层。每个卷积层使⽤$5 \times 5$卷积核和⼀个sigmoid激活函数。这些层将输⼊映射到多个⼆维特征输出，通常同时增加通道的数量。第⼀卷积层有6个输出通道，⽽第⼆个卷积层有16个输出通道。每个2 \times 2池操作（步幅2）通过空间下采样将维数减少4倍。卷积的输出形状由批量⼤⼩、通道数、⾼度、宽度决定。<br>为了将卷积块的输出传递给稠密块，我们必须在⼩批量中展平每个样本。换⾔之，我们将这个四维输⼊转换成全连接层所期望的⼆维输⼊。这⾥的⼆维表⽰的第⼀个维度索引⼩批量中的样本，第⼆个维度给出每个样本的平⾯向量表⽰。LeNet的稠密块有三个全连接层，分别有120、84和10个输出。因为我们在执⾏分类任务，所以输出层的10维对应于最后输出结果的数量。</p>
+<p>每个卷积块中的基本单元是⼀个卷积层、⼀个sigmoid激活函数和平均汇聚层。每个卷积层使⽤$5 \times 5$卷积核和一个sigmoid激活函数。这些层将输⼊映射到多个二维特征输出，通常同时增加通道的数量。第⼀卷积层有6个输出通道，⽽第⼆个卷积层有16个输出通道。每个$2 \times 2$池操作（步幅2）通过空间下采样将维数减少4倍。卷积的输出形状由批量⼤小、通道数、高度、宽度决定。<br>为了将卷积块的输出传递给稠密块，我们必须在小批量中展平每个样本。换言之，我们将这个四维输⼊转换成全连接层所期望的二维输⼊。这⾥的二维表⽰的第一个维度索引小批量中的样本，第二个维度给出每个样本的平面向量表⽰。LeNet的稠密块有三个全连接层，分别有120、84和10个输出。因为我们在执行分类任务，所以输出层的10维对应于最后输出结果的数量。</p>
 <h1 id="卷积层相比全连接层的优势"><a href="#卷积层相比全连接层的优势" class="headerlink" title="卷积层相比全连接层的优势"></a>卷积层相比全连接层的优势</h1><h2 id="参数优势"><a href="#参数优势" class="headerlink" title="参数优势"></a>参数优势</h2><p>在输入是一个图像的情况下，如果采用全连接层，那么图像中每一个像素都将需要一个权重参数$w$与其对应，在如今像素值往往能达到千万甚至亿万数量级的情况下，仅仅构建一个单层全连接神经网络也将需要大量的参数开销，这显然很不科学。<br>而卷积层仅需要的参数仅仅是卷积核内的参数，相比全连接层要少很多，这使得我们可以轻而易举的只占用很少量的内存空间就能构建深层神经网络。</p>
 <h2 id="特性优势"><a href="#特性优势" class="headerlink" title="特性优势"></a>特性优势</h2><p>同时，卷积操作也满足了平移不变性和局部性两个特点：</p>
 <ul>
 <li>平移不变性：不论卷积核移动到图像哪一个位置，其参数永远只与卷积核本身相关，与图像位置无关。</li>
-<li>局部性：卷积操作只关注图像中某一部分的局部特征。<br>这些是全连接层所不具备的特点，且这两个特点在图像处理中十分有用。比如，我们希望识别处场景中的猫，那么不论猫在哪里神经网络都应该正确判断，而这个猫肯定只占图像中的一小部分，而不是填充满整个画幅。</li>
+<li>局部性：卷积操作只关注图像中某一部分的局部特征。</li>
 </ul>
+<p>这些是全连接层所不具备的特点，且这两个特点在图像处理中十分有用。比如，我们希望识别处场景中的猫，那么不论猫在哪里神经网络都应该正确判断，而这个猫肯定只占图像中的一小部分，而不是填充满整个画幅。</p>
 
     </div>
 
@@ -303,8 +298,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/06/05/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_4.4_LoadData(2)/" rel="prev" title="Pytorch深度学习-第4.4节：加载数据（2）">
-                  <i class="fa fa-chevron-left"></i> Pytorch深度学习-第4.4节：加载数据（2）
+                <a href="/2023/06/07/%E5%9F%BA%E4%BA%8Epytorch%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/PytorchDL_05_Optimize/" rel="prev" title="Pytorch深度学习-第五节：网络的优化">
+                  <i class="fa fa-chevron-left"></i> Pytorch深度学习-第五节：网络的优化
                 </a>
             </div>
             <div class="post-nav-item">
