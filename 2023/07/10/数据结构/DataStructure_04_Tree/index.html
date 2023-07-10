@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="树。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-第四章：树与二叉树">
+<meta property="og:url" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/index.html">
+<meta property="og:site_name" content="码林">
+<meta property="og:description" content="树。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/1.1.png">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/1.2.png">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/1.3.png">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/1.4.png">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/1.5.png">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/1.6.png">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/2.1.png">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/2.2.png">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/2.3.png">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/2.4.png">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/3.1.png">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/3.2.png">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/3.3.png">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/3.4.png">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/3.5.png">
+<meta property="og:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/3.6.png">
+<meta property="article:published_time" content="2023-07-10T08:32:17.000Z">
+<meta property="article:modified_time" content="2023-07-10T13:50:19.826Z">
+<meta property="article:author" content="刘植林">
+<meta property="article:tag" content="考研">
+<meta property="article:tag" content="计算机基础知识">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/1.1.png">
+
+
+<link rel="canonical" href="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/","path":"2023/07/10/数据结构/DataStructure_04_Tree/","title":"数据结构-第四章：树与二叉树"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数据结构-第四章：树与二叉树 | 码林</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">码林</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">刘植林，留植林。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">20</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">树的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">树的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E7%82%B9%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">结点之间的关系：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E7%82%B9%E4%B8%8E%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">1.3.</span> <span class="nav-text">结点与树的属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F%E6%A0%91%E4%B8%8E%E6%97%A0%E5%BA%8F%E6%A0%91"><span class="nav-number">1.4.</span> <span class="nav-text">有序树与无序树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%AE%E6%9E%97"><span class="nav-number">1.5.</span> <span class="nav-text">森林</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">2.</span> <span class="nav-text">树的性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD"><span class="nav-number">3.1.</span> <span class="nav-text">定义与基本术语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%9A"><span class="nav-number">3.1.1.</span> <span class="nav-text">特殊二叉树：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">满二叉树与完全二叉树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">二叉排序树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">平衡二叉树</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">3.2.</span> <span class="nav-text">二叉树的性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">3.2.2.</span> <span class="nav-text">完全二叉树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">3.3.</span> <span class="nav-text">二叉树的存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8"><span class="nav-number">3.3.1.</span> <span class="nav-text">顺序存储</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="刘植林"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">刘植林</p>
+  <div class="site-description" itemprop="description">No gain,no pain.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/DataStructure_04_Tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="刘植林">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="码林">
+      <meta itemprop="description" content="No gain,no pain.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数据结构-第四章：树与二叉树 | 码林">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构-第四章：树与二叉树
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-07-10 16:32:17 / 修改时间：21:50:19" itemprop="dateCreated datePublished" datetime="2023-07-10T16:32:17+08:00">2023-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center>树。</center>
+
+<span id="more"></span>
+<h1 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h1><p><div style="width: 700px; margin: auto"><img src="1.1.png" alt></div></p>
+<h2 id="树的基本概念"><a href="#树的基本概念" class="headerlink" title="树的基本概念"></a>树的基本概念</h2><p><div style="width: 500px; margin: auto"><img src="1.2.png" alt></div></p>
+<ul>
+<li>空树：结点为空集的树</li>
+<li>非空树<ul>
+<li>有且仅有一个根节点</li>
+<li>没有后继的结点称为叶子结点</li>
+<li>有后继的结点称为分支结点</li>
+<li>除根结点任何一个结点有且仅有一个前驱</li>
+</ul>
+</li>
+<li>子树：树中的一部分可构成树的部分，如：</li>
+</ul>
+<p><div style="width: 400px; margin: auto"><img src="1.3.png" alt></div></p>
+<p>可以看出，树是一种递归递归定义的数据结构：任何树都可以用子树表示。</p>
+<h2 id="结点之间的关系："><a href="#结点之间的关系：" class="headerlink" title="结点之间的关系："></a>结点之间的关系：</h2><ul>
+<li>祖先结点</li>
+<li>子孙结点</li>
+<li>父结点</li>
+<li>孩子结点</li>
+<li>兄弟结点</li>
+<li>堂兄弟结点</li>
+</ul>
+<p>以上不做解释，可以直接“望文生义”</p>
+<ul>
+<li>路径：从上往下经过的边（树中的边是有向的）</li>
+<li>路径长度：经过几条边</li>
+</ul>
+<h2 id="结点与树的属性"><a href="#结点与树的属性" class="headerlink" title="结点与树的属性"></a>结点与树的属性</h2><ul>
+<li>结点的层次（深度）：从上往下数，默认根结点为第1层</li>
+<li>结点的高度：从下往上数</li>
+<li>树的高度（深度）：总共几层</li>
+<li>结点的度：有几个分支</li>
+<li>树的度：各结点度的最大值</li>
+</ul>
+<h2 id="有序树与无序树"><a href="#有序树与无序树" class="headerlink" title="有序树与无序树"></a>有序树与无序树</h2><ul>
+<li>有序树：逻辑上看树种结点的各子树从左至右是有次序的，不能互换</li>
+</ul>
+<p><div style="width: 400px; margin: auto"><img src="1.4.png" alt></div></p>
+<ul>
+<li>无序树：逻辑上看树种结点的各子树从左至右是无次序的，可以互换</li>
+</ul>
+<p><div style="width: 500px; margin: auto"><img src="1.5.png" alt></div></p>
+<p>具体取决于所存数据，是否需要通过结点左右位置反应逻辑关系。</p>
+<h2 id="森林"><a href="#森林" class="headerlink" title="森林"></a>森林</h2><p>m课互不相交的树的集合。</p>
+<p><div style="width: 400px; margin: auto"><img src="1.6.png" alt></div></p>
+<h1 id="树的性质"><a href="#树的性质" class="headerlink" title="树的性质"></a>树的性质</h1><p><div style="width: 600px; margin: auto"><img src="2.1.png" alt></div></p>
+<ul>
+<li>结点数=总度数+1</li>
+<li>度为m的树、m叉树的区别</li>
+</ul>
+<p><div style="width: 600px; margin: auto"><img src="2.2.png" alt></div></p>
+<ul>
+<li><p>度为m的树第i层至多有$m^{i-1}$个结点</p>
+<ul>
+<li>第一层:$m^0$</li>
+<li>第二层:$m^1$</li>
+<li>第三层:$m^2$</li>
+<li>…</li>
+</ul>
+</li>
+<li><p>高度为h的m叉树最多有$\frac{m^k-1}{m-1}$个结点</p>
+<ul>
+<li>等比数列求和</li>
+</ul>
+</li>
+<li>高度为h的m叉树至少有h个结点；高度为h度为m的树至少有h+m-1个结点</li>
+</ul>
+<p><div style="width: 400px; margin: auto"><img src="2.3.png" alt></div></p>
+<ul>
+<li>具有n个结点的m叉树的最小高度为[log_m(n(m-1)+1)]</li>
+</ul>
+<p><div style="width: 500px; margin: auto"><img src="2.4.png" alt></div></p>
+<h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><h2 id="定义与基本术语"><a href="#定义与基本术语" class="headerlink" title="定义与基本术语"></a>定义与基本术语</h2><p><div style="width: 600px; margin: auto"><img src="3.1.png" alt></div></p>
+<p>二叉树是n（n&gt;=0）个结点的有限集合：</p>
+<ul>
+<li>空二叉树，即n=0</li>
+<li>由一个根节点和两个互不相交的称为根的左子树和右子树组成。左右子树分别各是一棵二叉树</li>
+</ul>
+<p>特点：</p>
+<ul>
+<li>每个结点至多只有两课子树</li>
+<li>左右子树不能颠倒（二叉树是有序树）</li>
+</ul>
+<p><div style="width: 700px; margin: auto"><img src="3.2.png" alt></div></p>
+<h3 id="特殊二叉树："><a href="#特殊二叉树：" class="headerlink" title="特殊二叉树："></a>特殊二叉树：</h3><h4 id="满二叉树与完全二叉树"><a href="#满二叉树与完全二叉树" class="headerlink" title="满二叉树与完全二叉树"></a>满二叉树与完全二叉树</h4><ul>
+<li>满二叉树：高度为h，含有$2^h-1$个结点的二叉树<ul>
+<li>只有最后一层有叶子结点</li>
+<li>不存在度为1的结点</li>
+<li>按层序从1开始编号，结点i的左孩子为2i，右孩子为2i+1，父节点为[i/2]（如果有）</li>
+</ul>
+</li>
+</ul>
+<p><div style="width: 300px; margin: auto"><img src="3.3.png" alt></div></p>
+<ul>
+<li>完全二叉树：当且仅当其每个结点都与高度为h的满二叉树中编号为1-n的结点一一对应时称为完全二叉树<ul>
+<li>只有最后两层可能有叶子结点</li>
+<li>最多只有一个度为1的结点</li>
+<li>同上③</li>
+<li>i&lt;=[n/2]为分支结点，i&gt;[n/2]为叶子结点</li>
+</ul>
+</li>
+</ul>
+<p><div style="width: 300px; margin: auto"><img src="3.4.png" alt></div></p>
+<h4 id="二叉排序树"><a href="#二叉排序树" class="headerlink" title="二叉排序树"></a>二叉排序树</h4><p>一棵二叉树或是空二叉树，有以下性质：</p>
+<ul>
+<li>左子树上所有结点的关键字小于根节点的关键字</li>
+<li>右子树上所有结点的关键字大于根节点的关键字</li>
+<li>左子树和右子树又各是一棵二叉排序树</li>
+</ul>
+<p><div style="width: 700px; margin: auto"><img src="3.5.png" alt></div></p>
+<h4 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h4><p>树上任意结点的左子树和右子树深度只差不超过1。</p>
+<p><div style="width: 300px; margin: auto"><img src="3.6.png" alt></div></p>
+<p>平衡二叉树尽量增加宽度而非深度，以避免频繁的对比，提高搜索效率。</p>
+<h2 id="二叉树的性质"><a href="#二叉树的性质" class="headerlink" title="二叉树的性质"></a>二叉树的性质</h2><h3 id="二叉树-1"><a href="#二叉树-1" class="headerlink" title="二叉树"></a>二叉树</h3><ul>
+<li>设非空二叉树中度为0、1和2的结点个数分别为$n_0$，$n_1$，$n_2$，则$n_0=n-2+1$（叶子结点比二分支结点多一个）<br>  假设树种结点总数为n，则：<ul>
+<li>$n=n_0+n_1+n_2$</li>
+<li>$n=n_1+2n_2+1$<br>两式相减可证 </li>
+</ul>
+</li>
+</ul>
+<h3 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a>完全二叉树</h3><ul>
+<li>具有n个结点的完全二叉树的高度h为[$log_2(n+1)$]（向上取整）或$[log_2n]+1$（向下取整）<ul>
+<li>第一个：由高为h的满二叉树和h-1的满二叉树夹逼所得</li>
+<li>第二个：由高为h-1的满二叉树和高位h的完全二叉树夹逼所得</li>
+</ul>
+</li>
+<li>对于完全二叉树，可以有结点数n推出度为0，1，2的结点个数<ul>
+<li>完全二叉树最多只有一个度为1的结点，即$n_1=0或1$</li>
+<li>$n_0=n_2+1$→$n_0+n_2$一定是奇数</li>
+</ul>
+</li>
+</ul>
+<h2 id="二叉树的存储结构"><a href="#二叉树的存储结构" class="headerlink" title="二叉树的存储结构"></a>二叉树的存储结构</h2><h3 id="顺序存储"><a href="#顺序存储" class="headerlink" title="顺序存储"></a>顺序存储</h3>
+    </div>
+
+    
+    
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">---------------------本文结束---------------------</div>
+    
+</div>
+  
+</div>
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%80%83%E7%A0%94/" rel="tag"><i class="fa fa-tag"></i>考研</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag"><i class="fa fa-tag"></i>计算机基础知识</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/07/06/%E9%80%86%E6%B8%B2%E6%9F%93/Unet/" rel="prev" title="Unet——简单高效的图像处理网络">
+                  <i class="fa fa-chevron-left"></i> Unet——简单高效的图像处理网络
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-tree"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李林晁</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"mhchem":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
